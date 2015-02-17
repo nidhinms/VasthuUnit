@@ -40,7 +40,6 @@ html,body {
     font-size:12px;
     height:100%;
     margin:0px;
-    padding:5px;
     text-transform:uppercase;
     width:100%;
 }
@@ -115,21 +114,23 @@ h1 {
 }
 
 .input_number {
-    width: 30%;
-    font-size: 2em;
+   
 }
 
 .input_group {
-    font-size: 2em;
-    height: 5%;
-    padding: 10px;
 }
 
 .button_style_main {
     
 }
 
+#sumScreen_text1,#sumScreen_text2,#sumScreen_text3,#sumScreen_text4,#sumScreen_text5,#sumScreen_text6 {
+    width: 25%;
+    font-size: 1.2em;
+    background-color: #e9f7f7;
+    margin: 2px;
+}
+
 #sumScreen_add_button {
-    width: 20%;
-    font-size: 3em;
+    
 }
