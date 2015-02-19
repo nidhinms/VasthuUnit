@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+        <script src="./Script/VasthuUnit.js"></script>
+        <script src="./Script/knockout-3.2.0.js"></script>
+        <script src="./Script/jquery.js"></script>
+        <script src="./Script/jquery.mobile-1.4.5.js"></script>
+        <script src="./Script/events.js"></script>
+        <title>Convert From CM</title>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+                Test();
+                function convertPageViewModel() {
+                    this.cm = ko.observable(0);
+                    this.vasthuUnit = ko.observable(new VasthuUnit(0));
+                    this.converted = ko.computed(function () {
+                        return "sffsfs"; //this.vasthuUnit().koal + " koal" + this.vasthuUnit().yava + " yava";
+                    });
+                    this.upadate = function () {
+                        this.vasthuUnit().updateCMValue(this.cm());
+                    }
+                }
+                var model = new convertPageViewModel();
+                ko.applyBindings(model);
+                $("#sumScreen_add_button").click(function () {
+                    alert("Clicked");
+                });
+            });
+        </script>
+    </head>
+    <body>
+        
+        <div data-role="page" id="convertPage">
+
+          <div data-role="header">
+            <h1>Convert from CM</h1>
+          </div>
+            <div data-role="ui-content">
+                <label for="convertPage_CM">In Centimeters</label>
+                <input type="number" id="convertPage_CM" data-bind="value: cm change: update"/>
+                <p id="convertPage_koal" data-bind="text: cm"></p>
+                <p id="convertPage_viral" data-bind="text: viral"></p>
+                <p id="convertPage_yava" data-bind="text: converted"></p>
+            </div>
+          <div data-role="footer">
+            <h1>Footer Text</h1>
+          </div>
+
+        </div>
+    </body>
+</html>

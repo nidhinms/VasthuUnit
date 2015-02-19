@@ -114,23 +114,51 @@ h1 {
 }
 
 .input_number {
-   
+   font-size: 1.2em;
+   font-weight: bold;
 }
 
 .input_group {
+    margin-left: 2%;
+    margin-right: 2%;
 }
 
 .button_style_main {
-    
+  background: #3498db;
+  background-image: -webkit-linear-gradient(top, #3498db, #2980b9);
+  background-image: -moz-linear-gradient(top, #3498db, #2980b9);
+  background-image: -ms-linear-gradient(top, #3498db, #2980b9);
+  background-image: -o-linear-gradient(top, #3498db, #2980b9);
+  background-image: linear-gradient(to bottom, #3498db, #2980b9);
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  font-family: Arial;
+  color: #ffffff;
+  font-size: 1.2em;
+  padding: 0 5px 0 5px;
+  text-decoration: none;
+}
+
+.button_style_main:hover {
+  background: #3cb0fd;
+  background-image: -webkit-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -moz-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -ms-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: -o-linear-gradient(top, #3cb0fd, #3498db);
+  background-image: linear-gradient(to bottom, #3cb0fd, #3498db);
+  text-decoration: none;
 }
 
 #sumScreen_text1,#sumScreen_text2,#sumScreen_text3,#sumScreen_text4,#sumScreen_text5,#sumScreen_text6 {
-    width: 25%;
+    width: 29%;
     font-size: 1.2em;
     background-color: #e9f7f7;
     margin: 2px;
 }
 
 #sumScreen_add_button {
-    
+    width: 20%;
+    margin: 5px auto 0 auto;
+    display: block;
 }
