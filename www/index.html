@@ -1,25 +1,219 @@
 <!DOCTYPE html>
 
 <html lang="en">
-    <head>
-        <meta name="viewport" content="width=device-width, initial-scale=1">
-        <link rel="stylesheet" href="./css/jquery.mobile-1.4.5.css">
-        <script src="./Script/jquery.js"></script>
-        <script src="./Script/jquery.mobile-1.4.5.js"></script>
-    </head> 
-    <body data-role="page">
-        <fieldset id="sumScreen_fieldset1" class="input_group">
-            <legend>First Value</legend>
-            <input type="number" id="sumScreen_text1" class="input_number"/>
-            <input type="number" id="sumScreen_text2" class="input_number"/>
-            <input type="number" id="sumScreen_text3" class="input_number"/>
-        </fieldset>
-        <fieldset id="sumScreen_fieldset2" class="input_group">
-            <legend>Second Value</legend>
-            <input type="number" id="sumScreen_text4" class="input_number"/>
-            <input type="number" id="sumScreen_text5" class="input_number"/>
-            <input type="number" id="sumScreen_text6" class="input_number"/>
-        </fieldset>
-        <button id="sumScreen_add_button" class="button_style_main">Add</button>
-    </body>
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+    <link rel="stylesheet" href="css/index.css">
+    <script src="./Script/VasthuUnit.js">
+    </script>
+    <script src="./Script/knockout-3.2.0.js">
+    </script>
+    <script src="./Script/jquery.js">
+    </script>
+    <script src="./Script/jquery.mobile-1.4.5.js">
+    </script>
+    <script src="./Script/events.js">
+    </script>
+    <title>
+      Convert From CM
+    </title>
+    <script type="text/javascript">
+
+      Test();
+      function convertPageViewModel() {
+        this.cm = ko.observable(0);
+        this.koal = ko.observable(0);
+        this.yava = ko.observable(0);
+        this.viral = ko.observable(0);
+        this.converted = ko.observable("In Vasthu Init");
+        this.convertedToCM = ko.observable("In CM");
+
+        this.vasthuUnit = new VasthuUnit(0);
+
+        this.vasthuUnitToCM = new VasthuUnit(0);
+
+        this.fromCM = ko.observable(true);
+      }
+
+      var model = new convertPageViewModel();
+      $(document).ready(function () {
+        model.cm.subscribe(function(newValue) {
+          model.vasthuUnit.updateCMValue(newValue);
+          model.converted(model.vasthuUnit.koal + " koal " + model.vasthuUnit.viral + " viral " + model.vasthuUnit.yava + " yava ");
+        });
+
+        function updateFromVasthuUnit(newValue, unitPart) {
+          if (unitPart == 0) {
+            model.vasthuUnitToCM.koal = newValue;
+          }
+          else if (unitPart == 1) {
+            model.vasthuUnitToCM.viral = newValue;
+          }
+          else if (unitPart == 2) {
+            model.vasthuUnitToCM.yava = newValue;
+          }
+          model.convertedToCM(model.vasthuUnitToCM.getCM() + " cm");
+        }
+
+        model.koal.subscribe(function(newValue) {
+          updateFromVasthuUnit(newValue, 0);
+        });
+        model.viral.subscribe(function(newValue) {
+          updateFromVasthuUnit(newValue, 1);
+        });
+        model.yava.subscribe(function(newValue) {
+          updateFromVasthuUnit(newValue, 2);
+        });
+        ko.applyBindings(model);
+      });
+
+    </script>
+
+  </head>
+
+  <body>
+
+    <!--Convert page start-->
+
+    <div data-role="page" id="page_homeScreen">
+
+      <div data-role="main" class="ui-content">
+
+        <div data-role="header">
+
+          <h1>
+
+            Vasthu Unit
+
+          </h1>
+
+        </div>
+
+        <div>
+
+          <a href="#page_convertPage" data-role="button">
+
+            Convert
+
+          </a>
+
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+
+          <h1>
+
+            No Copyrights
+
+          </h1>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!--Convert page end-->
+
+   
+
+    <!--Convert page start-->
+
+    <div data-role="page" id="page_convertPage">
+
+      <div  data-role="main" class="ui-content">
+
+        <div data-role="header" data-add-back-btn="true">
+
+          <h1>
+
+            Convert from CM
+
+          </h1>
+
+        </div>
+
+        <div data-role="controlgroup" data-type="horizontal">
+
+          <button data-role="button" onclick="model.fromCM(true);" data-bind="css :{'ui-btn-active' : fromCM() == true}">
+
+            From CM
+
+          </button>
+
+          <button data-role="button" onclick="model.fromCM(false);" data-bind="css :{'ui-btn-active' : fromCM() == false}">
+
+            To CM
+
+          </button>
+
+        </div>
+
+        <div data-bind="visible :fromCM">
+
+          <label for="convertPage_CM">
+
+            In Centimeters
+
+          </label>
+
+          <input type="number" id="convertPage_CM" data-bind="textInput: cm"/>
+
+          <span id="convertPage_converted" data-bind="text: converted">
+
+          </span>
+
+        </div>
+
+        <div data-bind="visible :fromCM() == false">
+
+          <label for="convertPage_koal">
+
+            Koal
+
+          </label>
+
+          <input type="number" id="convertPage_koal" data-bind="textInput: koal"/>
+
+          <label for="convertPage_viral">
+
+            Viral
+
+          </label>
+
+          <input type="number" id="convertPage_viral" data-bind="textInput: viral"/>
+
+          <label for="convertPage_yava">
+
+            Yava
+
+          </label>
+
+          <input type="number" id="convertPage_yava" data-bind="textInput: yava"/>
+
+          <span id="convertPage_converted" data-bind="text: convertedToCM">
+
+          </span>
+
+        </div>
+
+        <div data-role="footer" data-position="fixed">
+
+          <h1>
+
+            No Copyrights
+
+          </h1>
+
+        </div>
+
+      </div>
+
+      <!--Convert page end-->
+
+    </div>
+
+  </body>
+
 </html>
