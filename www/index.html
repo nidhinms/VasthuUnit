@@ -1,165 +1,267 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
-    <link rel="stylesheet" href="css/index.css">
-    <title>
-      Convert From CM
-    </title>
-  </head>
-  <body data-ng-app="VasthuUnitApp">
-    <!--Home page start-->
-    <div data-role="page" id="page_homeScreen">
-      <div data-role="main" class="ui-content">
-        <div data-role="header">
-          <h1>
-            Vasthu Unit
-          </h1>
-        </div>
-        <div data-role="content">
-          <a href="#page_convertPage" data-role="button">
-            Convert
-          </a>
-          <a href="#page_addScreen" data-role="button">
-            Add
-          </a>
-        </div>
-        <div data-role="footer" data-position="fixed">
-          <h1>
-            No Copyrights
-          </h1>
-        </div>
-      </div>
-    </div>
-    <!--Home page end-->
+    <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="css/jquery.mobile-1.4.5.min.css">
+                <link rel="stylesheet" href="css/index.css">
+                    <title>
 
-    <!--Convert page start-->
-    <div data-role="page" id="page_convertPage" data-ng-controller="convertPageController">
-      <div  data-role="main" class="ui-content">
-        <div data-role="header">
-			<a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a> 
-          <h1>
+      Convert From CM
+
+    </title>
+                </head>
+                <body data-ng-app="VasthuUnitApp">
+                    <!--Home page start-->
+                    <div data-role="page" id="page_homeScreen">
+                        <div data-role="main" class="ui-content">
+                            <div data-role="header">
+                                <h1>
+
+            Vasthu Unit
+
+          </h1>
+                            </div>
+                            <div data-role="content">
+                                <a href="#page_convertPage" data-role="button">
+
+            Convert
+
+          </a>
+                                <a href="#page_addScreen" data-role="button">
+
+            Add
+
+          </a>
+                                <a href="#page_geometricalCalulations" data-role="button">
+
+            Geometry
+
+          </a>
+                            </div>
+                            <div data-role="footer" data-position="fixed">
+                                <h1>
+
+            No Copyrights
+
+          </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Home page end-->
+                    <!--Convert page start-->
+                    <div data-role="page" id="page_convertPage" data-ng-controller="convertPageController">
+                        <div  data-role="main" class="ui-content">
+                            <div data-role="header">
+                                <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+                                <h1>
+
             Convert from CM
+
           </h1>
-        </div>
-        <div data-role="controlgroup" data-type="horizontal">
-          <button data-role="button" data-ng-click="pageProperties.convertDirection = 1" data-ng-class="{'ui-btn-active':pageProperties.convertDirection == 1}">
+                            </div>
+                            <div data-role="controlgroup" data-type="horizontal">
+                                <button data-role="button" data-ng-click="pageProperties.convertDirection = 1" data-ng-class="{'ui-btn-active':pageProperties.convertDirection == 1}">
+
             From CM
+
           </button>
-          <button data-role="button"  data-ng-click="pageProperties.convertDirection = 2" data-ng-class="{'ui-btn-active':pageProperties.convertDirection == 2}">
+                                <button data-role="button"  data-ng-click="pageProperties.convertDirection = 2" data-ng-class="{'ui-btn-active':pageProperties.convertDirection == 2}">
+
             To CM
+
           </button>
-        </div>
-        <div data-ng-show="pageProperties.convertDirection == 1">
-          <label for="convertPage_CM">
+                            </div>
+                            <div data-ng-show="pageProperties.convertDirection == 1">
+                                <label for="convertPage_CM">
+
             In Centimeters
+
           </label>
-          <input type="number" id="convertPage_CM" data-ng-model="unitObjectForCMToV.cm" step="any"/>
-          <span id="convertPage_converted">
-			{{convertedFromCM()}}
+                                <input type="number" id="convertPage_CM" data-ng-model="unitObjectForCMToV.cm" step="any"/>
+                                <span id="convertPage_converted">
+
+            {{convertedFromCM()}}
+
           </span>
-        </div>
-        <div  data-ng-show="pageProperties.convertDirection == 2">
-          <label for="convertPage_koal">
+                            </div>
+                            <div  data-ng-show="pageProperties.convertDirection == 2">
+                                <label for="convertPage_koal">
+
             Koal
+
           </label>
-          <input type="number" id="convertPage_koal" data-ng-model="unitObjectForVToCM.koal" step="any"/>
-          <label for="convertPage_viral">
+                                <input type="number" id="convertPage_koal" data-ng-model="unitObjectForVToCM.koal" step="any"/>
+                                <label for="convertPage_viral">
+
             Viral
+
           </label>
-          <input type="number" id="convertPage_viral" data-ng-model="unitObjectForVToCM.viral" step="any"/>
-          <label for="convertPage_yava">
+                                <input type="number" id="convertPage_viral" data-ng-model="unitObjectForVToCM.viral" step="any"/>
+                                <label for="convertPage_yava">
+
             Yava
+
           </label>
-          <input type="number" id="convertPage_yava" data-ng-model="unitObjectForVToCM.yava" step="any"/>
-          <span id="convertPage_converted" >
-		  {{convertedFromVasthuUnit()}}
+                                <input type="number" id="convertPage_yava" data-ng-model="unitObjectForVToCM.yava" step="any"/>
+                                <span id="convertPage_converted" >
+
+          {{convertedFromVasthuUnit()}}
+
           </span>
-          <label for="convertPage_isAutoRearrange">
+                                <label for="convertPage_isAutoRearrange">
+
             Reformat unit automatically
+
           </label>
-          <input type="checkbox" id="convertPage_isAutoRearrange" data-ng-model="pageProperties.autoRearrange" data-mini="true"/>
-        </div>
-        <div data-role="footer" data-position="fixed">
-          <h1>
+                                <input type="checkbox" id="convertPage_isAutoRearrange" data-ng-model="pageProperties.autoRearrange" data-mini="true"/>
+                            </div>
+                            <div data-role="footer" data-position="fixed">
+                                <h1>
+
             No Copyrights
+
           </h1>
-        </div>
-      </div>
-	  
-    </div>
-      <!--Convert page end-->
-	  
-	  <!--Add page start-->
-    <div data-role="page" id="page_addScreen" data-ng-controller="addScreenController">
-      <div data-role="main" class="ui-content">
-        <div data-role="header">
-          <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a> 
-          <h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Convert page end-->
+                    <!--Add page start-->
+                    <div data-role="page" id="page_addScreen" data-ng-controller="addScreenController">
+                        <div data-role="main" class="ui-content">
+                            <div data-role="header">
+                                <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+                                <h1>
+
             Add Vasthu Units
+
           </h1>
-        </div>
-        <div data-role="content" id="page_addScreen_mainContent">
-			<ul data-role="listview" id="page_addScreen_itemList">
-				<li data-ng-repeat="unitObject in  additionItems">
-					<div  class="ui-grid-b">
-						<div class="ui-block-a">
-						<input type="number" ng-model="additionItems[$index].koal" id="page_addScreen_unit{{$index}}_koal"/>
-						</div>
-						<div class="ui-block-b">
-						<input type="number" ng-model="additionItems[$index].viral" id="page_addScreen_unit{{$index}}_viral"/>
-						</div>
-						<div class="ui-block-c">
-						<input type="number" ng-model="additionItems[$index].yava" id="page_addScreen_unit{{$index}}_yava"/>
-						</div>
-					</div>
-				</li>
-				<li style="border:1px solid green; text-align:right" data-role="navbar" data-mini="true" data-theme="b">
-					<ul>
-						<li>
-							<button id="page_addScreen_NewUnitObjectButton" href="index.html" data-role="button"  ng-click="addNew()">New</button> 
-						</li>
-						<li>
-							<button id="page_addScreen_NewUnitObjectButton" href="index.html" data-role="button" ng-click="remove()">Remove</button>
-						</li>
-					</ul>
-				</li>
-				<li data-role="list-divider" data-theme="b">
-					<div  class="ui-grid-b">
-						<div class="ui-block-a">
-							<label>{{getSum().koal + " koal"}}</label>
-						</div>
-						<div class="ui-block-b">
-							<label>{{getSum().viral + " viral"}}</label>
-						</div>
-						<div class="ui-block-c">
-							<label>{{getSum().yava + " yava"}}</label>
-						</div>
-					</div>
-				</li>
-			</ul>
-        </div>
-        <div data-role="footer" data-position="fixed">
-          <h1>
+                            </div>
+                            <div data-role="content" id="page_addScreen_mainContent">
+                                <ul data-role="listview" id="page_addScreen_itemList">
+                                    <li data-ng-repeat="unitObject in  additionItems">
+                                        <div  class="ui-grid-c page_addScreen_unitObject">
+                                            <div class="ui-block-a">
+                                                <input type="number" ng-model="additionItems[$index].unit.koal" id="page_addScreen_unit{{$index}}_koal"/>
+                                            </div>
+                                            <div class="ui-block-b">
+                                                <input type="number" ng-model="additionItems[$index].unit.viral" id="page_addScreen_unit{{$index}}_viral"/>
+                                            </div>
+                                            <div class="ui-block-c">
+                                                <input type="number" ng-model="additionItems[$index].unit.yava" id="page_addScreen_unit{{$index}}_yava"/>
+                                            </div>
+                                            <div class="ui-block-d">
+                                                <button data-icon="plus" ng-show="additionItems[$index].add  == true" data-iconpos="notext" data-ng-click="additionItems[$index].add = false">+</button>
+                                                <button data-icon="minus" ng-show="additionItems[$index].add  == false" data-iconpos="notext" data-ng-click="additionItems[$index].add = true">+</button>
+                                            </div>
+                                        </div>
+                                    </li>
+                                    <li style="border:1px solid green; text-align:right" data-role="navbar" data-mini="true" data-theme="b" id="page_addScreen_NewItemNavBar">
+                                        <ul>
+                                            <li>
+                                                <button id="page_addScreen_NewUnitObjectButton" href="index.html" data-role="button"  ng-click="addNew()">New</button>
+                                            </li>
+                                            <li>
+                                                <button id="page_addScreen_NewUnitObjectButton" href="index.html" data-role="button" ng-click="remove()">Remove</button>
+                                            </li>
+                                        </ul>
+                                    </li>
+                                    <li data-role="list-divider" data-theme="b">
+                                        <div class="ui-grid-b">
+                                            <div class="ui-block-a">
+                                                <label>{{getSum().koal + " koal"}}</label>
+                                            </div>
+                                            <div class="ui-block-b">
+                                                <label>{{getSum().viral + " viral"}}</label>
+                                            </div>
+                                            <div class="ui-block-c">
+                                                <label>{{getSum().yava + " yava"}}</label>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div data-role="footer" data-position="fixed">
+                                <h1>
+
             No Copyrights
+
           </h1>
-        </div>
-      </div>
-    </div>
-    <!--Add page end-->
-	
-	
-	
-	<!-- NOTE: -->
-	<!-- Include jquery mobile before angularjs to avoid binding issues -->
-	<!-- NOTE: -->
-    <script src="./Script/jquery.js"></script>
-    <script src="./Script/jquery.mobile-1.4.5.js"></script>
-    <script src="./Script/VasthuUnit.js"></script>
-    <script src="./Script/angular.min.js"></script>
-    <script src="./Script/events.js"></script>
-	
-	
-  </body>
-</html>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Add page end-->
+                    <!--Geometrical Calculations page start-->
+                    <div data-role="page" id="page_geometricalCalulations" data-ng-controller="GeometricalCalculationsController">
+                        <div data-role="main" class="ui-content">
+                            <div data-role="header">
+                                <a href="index.html" data-role="button" data-icon="arrow-l" data-iconpos="notext">Back</a>
+                                <h1>
+
+            Geometrical Calculations
+
+          </h1>
+                            </div>
+                            <div data-role="content">
+                                <div class="ui-grid-b" data-theme="b">
+                                    <div class="ui-block-a">
+                                        <label>Koal</label>
+                                    </div>
+                                    <div class="ui-block-b">
+                                        <label>Viral</label>
+                                    </div>
+                                    <div class="ui-block-c">
+                                        <label>Yava</label>
+                                    </div>
+                                </div>
+                                <div class="ui-grid-b" data-theme="b">
+                                    <div class="ui-block-a">
+                                        <input type="number" data-ng-model="unitObject.koal"/>
+                                    </div>
+                                    <div class="ui-block-b">
+                                        <input type="number" data-ng-model="unitObject.viral"/>
+                                    </div>
+                                    <div class="ui-block-c">
+                                        <input type="number" data-ng-model="unitObject.yava"/>
+                                    </div>
+                                </div>
+                                <div data-role="collapsible-set">
+                                    <div data-role="collapsible">
+                                        <h3>X2</h3>
+                                        <label>{{x2()}}</label>
+                                    </div>
+                                    <div data-role="collapsible">
+                                        <h3>X4</h3>
+                                        <label>{{x4()}}</label>
+                                    </div>
+                                    <div data-role="collapsible">
+                                        <h3>Perimeter</h3>
+                                        <label>{{perimeter()}}</label>
+                                    </div>
+                                    <div data-role="collapsible">
+                                        <h3>Divide</h3>
+                                        <input type="number" data-ng-model="divident"/>
+                                        <label>{{division()}}</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div data-role="footer" data-position="fixed">
+                                <h1>
+
+            No Copyrights
+
+          </h1>
+                            </div>
+                        </div>
+                    </div>
+                    <!--Geometrical Calculations page end-->
+                    <!-- NOTE: -->
+                    <!-- Include jquery mobile before angularjs to avoid binding issues -->
+                    <!-- NOTE: -->
+                    <script src="./Script/jquery.js"></script>
+                    <script src="./Script/jquery.mobile-1.4.5.js"></script>
+                    <script src="./Script/VasthuUnit.js"></script>
+                    <script src="./Script/angular.min.js"></script>
+                    <script src="./Script/events.js"></script>
+                </body>
+            </html>
+
