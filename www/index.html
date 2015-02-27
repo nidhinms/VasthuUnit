@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
     <head>
         <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -10,41 +10,39 @@
 
     </title>
                 </head>
-                <body data-ng-app="VasthuUnitApp">
+                <body data-ng-app="VasthuUnitApp" id="app_main_body">
                     <!--Home page start-->
                     <div data-role="page" id="page_homeScreen">
-                        <div data-role="main" class="ui-content">
-                            <div data-role="header">
-                                <h1>
+                        <div data-role="header">
+                            <h1>
 
             Vasthu Unit
 
           </h1>
-                            </div>
-                            <div data-role="content">
-                                <a href="#page_convertPage" data-role="button">
+                        </div>
+                        <div data-role="main" class="ui-content">
+                            <a href="#page_convertPage" data-role="button">
 
             Convert
 
           </a>
-                                <a href="#page_addScreen" data-role="button">
+                            <a href="#page_addScreen" data-role="button">
 
             Add
 
           </a>
-                                <a href="#page_geometricalCalulations" data-role="button">
+                            <a href="#page_geometricalCalulations" data-role="button">
 
             Geometry
 
           </a>
-                            </div>
-                            <div data-role="footer" data-position="fixed">
-                                <h1>
+                        </div>
+                        <div data-role="footer" data-position="fixed">
+                            <h1>
 
             No Copyrights
 
           </h1>
-                            </div>
                         </div>
                     </div>
                     <!--Home page end-->
@@ -80,7 +78,7 @@
                                 <input type="number" id="convertPage_CM" data-ng-model="unitObjectForCMToV.cm" step="any"/>
                                 <span id="convertPage_converted">
 
-            {{convertedFromCM()}}
+            {{convertedFromCM}}
 
           </span>
                             </div>
@@ -105,7 +103,7 @@
                                 <input type="number" id="convertPage_yava" data-ng-model="unitObjectForVToCM.yava" step="any"/>
                                 <span id="convertPage_converted" >
 
-          {{convertedFromVasthuUnit()}}
+          {{convertedFromVasthuUnit}}
 
           </span>
                                 <label for="convertPage_isAutoRearrange">
@@ -136,45 +134,45 @@
 
           </h1>
                             </div>
-                            <div data-role="content" id="page_addScreen_mainContent">
+                            <div data-role="main" class="ui-content" id="page_addScreen_mainContent">
                                 <ul data-role="listview" id="page_addScreen_itemList">
                                     <li data-ng-repeat="unitObject in  additionItems">
                                         <div  class="ui-grid-c page_addScreen_unitObject">
                                             <div class="ui-block-a">
-                                                <input type="number" ng-model="additionItems[$index].unit.koal" id="page_addScreen_unit{{$index}}_koal"/>
+                                                <input type="number" data-ng-model="additionItems[$index].unit.koal" id="page_addScreen_unit{{$index}}_koal"/>
                                             </div>
                                             <div class="ui-block-b">
-                                                <input type="number" ng-model="additionItems[$index].unit.viral" id="page_addScreen_unit{{$index}}_viral"/>
+                                                <input type="number" data-ng-model="additionItems[$index].unit.viral" id="page_addScreen_unit{{$index}}_viral"/>
                                             </div>
                                             <div class="ui-block-c">
-                                                <input type="number" ng-model="additionItems[$index].unit.yava" id="page_addScreen_unit{{$index}}_yava"/>
+                                                <input type="number" data-ng-model="additionItems[$index].unit.yava" id="page_addScreen_unit{{$index}}_yava"/>
                                             </div>
                                             <div class="ui-block-d">
-                                                <button data-icon="plus" ng-show="additionItems[$index].add  == true" data-iconpos="notext" data-ng-click="additionItems[$index].add = false">+</button>
-                                                <button data-icon="minus" ng-show="additionItems[$index].add  == false" data-iconpos="notext" data-ng-click="additionItems[$index].add = true">+</button>
+                                                <button data-icon="plus" data-ng-show="additionItems[$index].add  == true" data-iconpos="notext" data-ng-click="additionItems[$index].add = false">+</button>
+                                                <button data-icon="minus" data-ng-show="additionItems[$index].add  == false" data-iconpos="notext" data-ng-click="additionItems[$index].add = true">+</button>
                                             </div>
                                         </div>
                                     </li>
                                     <li style="border:1px solid green; text-align:right" data-role="navbar" data-mini="true" data-theme="b" id="page_addScreen_NewItemNavBar">
                                         <ul>
                                             <li>
-                                                <button id="page_addScreen_NewUnitObjectButton" href="index.html" data-role="button"  ng-click="addNew()">New</button>
+                                                <button id="page_addScreen_NewUnitObjectButton" href="index.html" data-role="button"  data-ng-click="addNew()">New</button>
                                             </li>
                                             <li>
-                                                <button id="page_addScreen_NewUnitObjectButton" href="index.html" data-role="button" ng-click="remove()">Remove</button>
+                                                <button id="page_addScreen_NewUnitObjectButton" href="index.html" data-role="button" data-ng-click="remove()">Remove</button>
                                             </li>
                                         </ul>
                                     </li>
                                     <li data-role="list-divider" data-theme="b">
                                         <div class="ui-grid-b">
                                             <div class="ui-block-a">
-                                                <label>{{getSum().koal + " koal"}}</label>
+                                                <label>{{getSum.koal + " koal"}}</label>
                                             </div>
                                             <div class="ui-block-b">
-                                                <label>{{getSum().viral + " viral"}}</label>
+                                                <label>{{getSum.viral + " viral"}}</label>
                                             </div>
                                             <div class="ui-block-c">
-                                                <label>{{getSum().yava + " yava"}}</label>
+                                                <label>{{getSum.yava + " yava"}}</label>
                                             </div>
                                         </div>
                                     </li>
@@ -201,7 +199,7 @@
 
           </h1>
                             </div>
-                            <div data-role="content">
+                            <div data-role="main" class="ui-content">
                                 <div class="ui-grid-b" data-theme="b">
                                     <div class="ui-block-a">
                                         <label>Koal</label>
@@ -227,20 +225,20 @@
                                 <div data-role="collapsible-set">
                                     <div data-role="collapsible">
                                         <h3>X2</h3>
-                                        <label>{{x2()}}</label>
+                                        <label>{{x2}}</label>
                                     </div>
                                     <div data-role="collapsible">
                                         <h3>X4</h3>
-                                        <label>{{x4()}}</label>
+                                        <label>{{x4}}</label>
                                     </div>
                                     <div data-role="collapsible">
                                         <h3>Perimeter</h3>
-                                        <label>{{perimeter()}}</label>
+                                        <label>{{perimeter}}</label>
                                     </div>
                                     <div data-role="collapsible">
                                         <h3>Divide</h3>
                                         <input type="number" data-ng-model="divident"/>
-                                        <label>{{division()}}</label>
+                                        <label>{{division}}</label>
                                     </div>
                                 </div>
                             </div>
