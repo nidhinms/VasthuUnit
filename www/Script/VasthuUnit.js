@@ -1,33 +1,41 @@
+Math.truncateDecimals = function (number) {
+    return Math[number < 0 ? 'ceil' : 'floor'](number);
+};
+
 function VasthuUnit(cm) {
 	this.koal = 0;
 	this.viral = 0;
 	this.yava = 0;
 	this.cm = 0;
 	if (arguments.length == 1) {
-	    this.cm = arguments[0];
-	    var negative = false;
-        if (cm < 0)
-        {
-            negative = true;
-            cm = cm * -1;
-        }
+	    this.cm = arguments[0];cm * -1;
+		if (isNaN(cm) == true)
+		{
+			cm = 0;
+		}
         var reminder;
-		this.koal = Math.floor(cm / 72);
+		this.koal = Math.truncateDecimals(cm / 72);
 		reminder = cm % 72;
-		this.viral = Math.floor(reminder / 3);
+		this.viral = Math.truncateDecimals(reminder / 3);
 		reminder = reminder % 3;
 		this.yava = reminder / (3 / 8);
 		this.yava = parseFloat(this.yava);
-        if (negative)
-        {
-            this.koal = this.koal * -1;
-            this.viral = this.viral * -1;
-            this.yava = this.yava * -1;
-        }
 	} else if (arguments.length == 3) {
 		this.koal = arguments[0];
 		this.viral = arguments[1];
 		this.yava = arguments[2];
+		if (isNaN(this.koal))
+		{
+			this.koal = 0;
+		}
+		if (isNaN(this.viral))
+		{
+			this.viral = 0;
+		}
+		if (isNaN(this.yava))
+		{
+			this.viral = 0;
+		}
 		this.cm = this.koal * 72 + this.viral * 3 + this.yava * (3 / 8);
 	}
 	this.getCM = function() {
@@ -35,36 +43,26 @@ function VasthuUnit(cm) {
 		return (parseFloat(cm));
 	}
 	this.getVasthuUnit = function () {
-	    if (cm < 0) {
-	        console.log("Reverse");
-	        reverseSign();
-	    }
-	    var k = Math.floor(this.cm / 72);
+	    var k = Math.truncateDecimals(this.cm / 72);
 	    var reminder = this.cm % 72;
-	    var v = Math.floor(reminder / 3);
+	    var v = Math.truncateDecimals(reminder / 3);
 	    reminder = reminder % 3;
 	    var y = reminder / (3 / 8);
-	    y = parseFloat(y).toFixed(2);
+	    y = parseFloat(y);
 	    var ret = new VasthuUnit(k, v, y);
-	    if (cm < 0) {
-	        ret.reverseSign();
-	    }
 	    return ret;
 	}
 	this.add = function(val) {
-		this.cm = Math.floor(this.cm + val.cm);
+		this.cm = this.cm + val.cm;
 		this.koal = this.koal + val.koal;
 		this.viral = this.viral + val.viral;
 		this.yava = this.yava + val.yava;
 		this.rearrange();
 	}
 	this.subtract = function (val) {
-	    this.cm = Math.floor(this.cm - val.cm);
-	    var sum = this.getCM() - val.getCM();
-
-	    this.koal = this.koal - val.koal;
-	    this.viral = this.viral - val.viral;
-	    this.yava = this.yava - val.yava;
+	    var thisInCM = this.getCM();
+		var valInCM = val.getCM();
+		this.updateCMValue(thisInCM - valInCM);
 	    this.rearrange();
 	}
 	this.multiply = function(val) {
@@ -83,38 +81,47 @@ function VasthuUnit(cm) {
 	this.rearrange = function () {
 	    var negative = this.isNegative();
 	    if (negative) {
-	        reverseSign();
+	        this.reverseSign();
 	    }
 	    var fractionKoal = parseFloat(this.koal % 1);
 	    if (fractionKoal > 0) {
-	        this.koal = Math.floor(this.koal);
+	        this.koal = Math.truncateDecimals(this.koal);
 	        this.viral = this.viral + fractionKoal * 24;
 	    }
 	    var fractionViral = parseFloat(this.viral % 1);
 	    if (fractionViral > 0) {
-	        this.viral = Math.floor(this.viral);
+	        this.viral = Math.truncateDecimals(this.viral);
 	        this.yava = this.yava + fractionViral * 8;
 	    }
 	    if (this.yava >= 8) {
-	        var viralToAdd = Math.floor(this.yava / 8);
+	        var viralToAdd = Math.truncateDecimals(this.yava / 8);
 	        this.viral = this.viral + viralToAdd;
 	        this.yava = parseFloat(this.yava % 8);
 	    }
 	    if (this.viral >= 24) {
-	        var koalToAdd = Math.floor(this.viral / 24);
+	        var koalToAdd = Math.truncateDecimals(this.viral / 24);
 	        this.koal = this.koal + koalToAdd;
 	        this.viral = this.viral % 24;
 	    }
         if (negative)
         {
-            reverseSign();
+            this.reverseSign();
         }
 	}
 	this.clone = function() {
 		return new VasthuUnit(this.koal, this.viral, this.yava);
 	}
 	this.toString = function() {
-		return this.koal + " koal " + this.viral + " viral " + parseFloat(this.yava).toFixed(2) + " yava";
+		if (isNaN(this.koal) || 
+			isNaN(this.viral) ||
+			isNaN(this.yava))
+			{
+				return "";
+			}
+			else
+			{
+				return this.koal + " കോല്‍ " + this.viral + " വിരൽ " + parseFloat(this.yava).toFixed(2) + " യവം";
+			}
 	}
 	this.reverseSign = function () {
 	    this.cm = this.cm * -1;
@@ -126,15 +133,22 @@ function VasthuUnit(cm) {
 	    if (arguments.length > 0) {
 	        this.cm = arguments[0];
 	    }
+		if (isNaN(cm))
+		{
+			this.cm = 0;
+		}
         var reminder;
-		this.koal = Math.floor(cm / 72);
-		reminder = cm % 72;
-		this.viral = Math.floor(reminder / 3);
+		this.koal = Math.truncateDecimals(this.cm / 72);
+		reminder = this.cm % 72;
+		this.viral = Math.truncateDecimals(reminder / 3);
 		reminder = reminder % 3;
 		this.yava = reminder / (3 / 8);
 		this.yava = parseFloat(this.yava);
 	}
 	this.isNegative = function () {
 	    return this.koal < 0 && this.viral < 0 && this.yava < 0;
+	}
+	this.differenceInCM = function(val) {
+		var diff = this.getCM() - val.getCM();
 	}
 }
